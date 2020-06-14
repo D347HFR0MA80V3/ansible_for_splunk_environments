@@ -7,6 +7,7 @@ services:
 install:
   - pip install molecule docker
   - pip install ansible-lint
+  - pip install flake8
 script:
   - molecule --version
   - ansible --version
