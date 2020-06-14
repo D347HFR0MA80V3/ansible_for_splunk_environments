@@ -1,0 +1,26 @@
+# Library Task... Include this to get the current winning value of a Splunk parameter.
+# Registers the get_property_value variable and get_property_value.content will contain the desired value.
+# How to use:
+# - include: library/tasks/splunk_api_get_property.yml
+#     get_property_filename=<name of file eg: indexes,server,web etc...>
+#     get_property_stanza=<name of staza eg: default,tcpout,sslConfig etc...>
+#     get_property_key=<name of key eg: pass4SymmKey,caCertPath,serverName etc...>
+#     get_property_no_log=<set no log eg: (yes|no)>
+#     get_property_validate_certs=<set certificate validation for api call eg: (yes|no)>
+
+- name: library_tasks - splunk_api_get_property - URI GET a splunk property setting -> {{ get_property_filename }}.conf -> [{{ get_property_stanza }}] -> {{ get_property_key }} = ?
+  uri:
+    method: GET
+    url: https://localhost:{{ splunk_all_mgmt_port }}/services/properties/{{ get_property_filename }}/{{ get_property_stanza }}/{{ get_property_key }}
+    headers:
+      Authorization: Splunk {{ splunk_cookie }}
+    return_content: yes
+    validate_certs: {{ get_property_validate_certs }}
+  no_log: {{ get_property_no_log }}
+  register: get_property_value
+  failed_when:
+    - get_property_value.status < 200
+    - get_property_value.status > 200
+    - get_property_value.status < 404
+    - get_property_value.status > 404
+  when: detected_status == 0

@@ -1,0 +1,5 @@
+# This content is delivered by Ansible.
+
+[]
+access = read : [ * ], write : [ admin ]
+export = system

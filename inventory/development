@@ -1,0 +1,41 @@
+# Development hosts for testing full automation capability of the collection #
+
+[splunk_all_sites_all_nodes:children]
+site1_splunk_all
+site2_splunk_all
+
+## Site 1 Groups ##
+[site1_splunk_all:children]
+site1_splunk_ds
+site1_splunk_idx
+site1_splunk_idxcm
+site1_splunk_sh
+site1_splunk_shcd
+
+[site1_splunk_ds]
+
+[site1_splunk_idx]
+
+[site1_splunk_idxcm]
+
+[site1_splunk_sh]
+
+[site1_splunk_shcd]
+
+## Site 2 Groups ##
+[site2_splunk_all:children]
+site2_splunk_ds
+site2_splunk_idx
+site2_splunk_idxcm
+site2_splunk_sh
+site2_splunk_shcd
+
+[site2_splunk_ds]
+
+[site2_splunk_idx]
+
+[site2_splunk_idxcm]
+
+[site2_splunk_sh]
+
+[site2_splunk_shcd]

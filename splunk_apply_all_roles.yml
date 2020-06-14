@@ -1,0 +1,20 @@
+# Launch playbook for all splunk roles against entire environments.
+
+- hosts: "{{ target }}"
+  become: yes
+  become_method: sudo
+  become_user: "{{ splunk_all_splunk_user }}"
+  gather_facts: yes
+  vars_prompt:
+    - name: "target"
+      prompt: "Specify target group(s) and / or host(s)"
+      private: no
+    - name: "splunk_admin_username"
+      prompt: "Input an administrator username"
+      private: no
+    - name: "splunk_admin_password"
+      prompt: "Input the administrative user password"
+      private: yes
+      no_log: yes
+  roles:
+    - splunk_all
