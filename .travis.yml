@@ -6,6 +6,7 @@ services:
   - docker
 install:
   - pip install molecule docker
+  - pip install ansible-lint
 script:
   - molecule --version
   - ansible --version
