@@ -6,6 +6,7 @@ services:
   - docker
 install:
   - pip install molecule docker
+  - pip install yamllint
   - pip install ansible-lint
   - pip install flake8
 script:
