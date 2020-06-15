@@ -1,3 +1,4 @@
+---
 # defaults file for splunk_all
 
 splunk_all_default_prefix: 'z_shark_defaults'
