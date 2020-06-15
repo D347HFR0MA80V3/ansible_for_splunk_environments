@@ -3,11 +3,10 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint:  |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
+lint: |
+  cd .. && yamllint splunk_all
+  ansible-lint ./splunk_all
+  flake8 ./splunk_all
 platforms:
   - name: instance
     image: centos:7
