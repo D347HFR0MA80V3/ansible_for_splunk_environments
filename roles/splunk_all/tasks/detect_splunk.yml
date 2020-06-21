@@ -1,0 +1,9 @@
+---
+# Detect if Splunk is installed, the appropriate user is configure, assert pass
+# or fail, exit on fail.
+
+- name: detect_splunk - ID the Splunk user and register response
+  command: id {{ splunk_all_splunk_user }}
+  ignore_errors: true
+  register: detect_splunk_user
+  changed_when: detect_splunk_user.rc != 0
