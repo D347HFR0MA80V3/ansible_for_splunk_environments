@@ -9,6 +9,7 @@ install:
   - pip3 install yamllint
   - pip3 install ansible-lint
   - pip3 install flake8
+  - pip3 install testinfra
   - pip3 install takeltest
 script:
   - molecule --version
