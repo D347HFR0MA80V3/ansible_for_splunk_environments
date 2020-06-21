@@ -4,13 +4,14 @@ dependency:
 driver:
   name: docker
 lint: |
-  cd .. && yamllint splunk_all
-  ansible-lint ./splunk_all
-  flake8 ./splunk_all
+  set -e
+  yamllint ../splunk_all
+  ansible-lint ../splunk_all
+  flake8 ../splunk_all --exit-zero
 platforms:
   - name: instance
     image: centos:7
 provisioner:
   name: ansible
 verifier:
-  name: ansible
+  name: testinfra
