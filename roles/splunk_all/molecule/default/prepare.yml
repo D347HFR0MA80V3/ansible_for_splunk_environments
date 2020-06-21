@@ -1,0 +1,9 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: prepare - USER check or create the splunk user
+      user:
+        name: splunk
+        system: true
+        state: present
