@@ -1,15 +1,12 @@
 import os
-
+import pytest
+import takeltest
 import testinfra.utils.ansible_runner
 
-testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
-    os.environ['MOLECULE_INVENTORY_FILE']
-).get_hosts('all')
+
+testinfra_hosts = takeltest.hosts()
 
 
-def test_hosts_file(host):
-    f = host.file('/etc/hosts')
-
-    assert f.exists
-    assert f.user == 'root'
-    assert f.group == 'root'
+def test_detect_splunk(host, testvars):
+    v = testvars['splunk_all_splunk_user']
+    assert host.user(v) is 'splunk'
