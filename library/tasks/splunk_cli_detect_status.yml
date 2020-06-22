@@ -1,3 +1,4 @@
+---
 # Library Task... Include this to detect if Splunk is running.
 # Creates the detected_status variable that is a useful condition check for tasks dependent on splunk responses.
 # How to use:

@@ -1,3 +1,4 @@
+---
 # Library Task... Include this to check / deploy a configuration app.
 # How to use:
 # - include: library/tasks/splunk_deploy_config_app.yml

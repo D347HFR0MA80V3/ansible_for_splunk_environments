@@ -1,3 +1,4 @@
+---
 # Library Task... Include this to get the current winning value of a Splunk parameter.
 # Registers the get_property_value variable and get_property_value.content will contain the desired value.
 # How to use:
@@ -15,8 +16,8 @@
     headers:
       Authorization: Splunk {{ splunk_cookie }}
     return_content: yes
-    validate_certs: {{ get_property_validate_certs }}
-  no_log: {{ get_property_no_log }}
+    validate_certs: "{{ get_property_validate_certs }}"
+  no_log: "{{ get_property_no_log }}"
   register: get_property_value
   failed_when:
     - get_property_value.status < 200

@@ -1,3 +1,4 @@
+---
 # Launch playbook for splunk_all role.
 
 - hosts: "{{ target }}"

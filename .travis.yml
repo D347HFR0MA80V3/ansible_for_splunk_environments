@@ -14,4 +14,6 @@ install:
 script:
   - molecule --version
   - ansible --version
+  - ansible-lint ./
+  - yamllint ./
   - cd roles/splunk_all && molecule test
