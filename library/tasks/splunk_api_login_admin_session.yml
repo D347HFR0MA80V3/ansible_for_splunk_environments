@@ -1,3 +1,4 @@
+---
 # Library Task... Include this to securely login a Splunk and return a self expiring session cookie.
 # Registers the splunk_admin_cookie that will reset in 60 minutes based on the splunk defaults.
 # How to use:

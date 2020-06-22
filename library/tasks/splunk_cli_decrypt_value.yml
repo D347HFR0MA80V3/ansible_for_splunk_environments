@@ -1,3 +1,4 @@
+---
 # Library Task... Include this to get the decrypted value for a captured secret.
 # Registers the cli_decrypted_value variable. cli_decrypt_value.stdout contains the desired result.
 # How to use:
