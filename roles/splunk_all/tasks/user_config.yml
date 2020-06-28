@@ -1,14 +1,14 @@
 ---
 # Check and/or configure customizations for splunk user settings
 
-- name: user_config - USER get/configure splunk user settings
+- name: user_config - USER get / configure splunk user settings
   user:
     name: "{{ splunk_all_splunk_user }}"
     home: "{{ splunk_all_user_home }}"
     shell: "{{ splunk_all_user_shell }}"
   register: user_config_settings
 
-- name: user_config - TEMPLATE check/deploy user_config templates
+- name: user_config - TEMPLATE check / deploy user_config templates
   template:
     src: templates/user_config/{{ item.src }}
     dest: "{{ splunk_all_user_home }}/{{ item.dst }}"
