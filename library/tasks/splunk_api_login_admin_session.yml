@@ -1,11 +1,14 @@
 ---
 # Library Task... Include this to securely login a Splunk and return a self expiring session cookie.
+
 # Registers the splunk_admin_cookie that will reset in 60 minutes based on the splunk defaults.
+
 # How to use:
 # - include: library/tasks/splunk_api_login_admin_session.yml
+#     task_bread_crumb=<name of the task that called this one eg: detect_splunk>
 #     login_admin_session_validate_certs=<set certificate validation for api call eg: (yes|no)>
 
-- name: library_tasks - splunk_api_login_admin_session - Logging in Splunk admin user -> {{ username }}... common failures are typically mistyped admin creds or your AAA service. Also ensure Splunk is running.
+- name: "{{ task_bread_crumb }} - library/tasks/splunk_api_login_admin_session - Logging in Splunk admin user -> {{ username }}... common failures are typically mistyped admin creds or your AAA service. Also ensure Splunk is running."
   uri:
     method: POST
     url: https://localhost:{{ splunk_all_mgmt_port }}/services/auth/login
