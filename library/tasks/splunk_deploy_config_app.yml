@@ -1,12 +1,14 @@
 ---
 # Library Task... Include this to check / deploy a configuration app.
+
 # How to use:
 # - include: library/tasks/splunk_deploy_config_app.yml
+#     task_bread_crumb=<name of the task that called this one eg: detect_splunk>
 #     deploy_config_app_name=<name of app eg: default_ouputs,default_inputs etc...>
 #     deploy_config_app_destpath=<path variable eg: "{{ splunk_all_splunk_appspath }}">
 #     deploy_config_app_filename=<name of the splunk .conf file eg: indexes,server etc...>
 
-- name: library_tasks - splunk_deploy_config_app - CHECK / CREATE file path for {{ deploy_config_app_name }}
+- name: "{{ task_bread_crumb }} - library/tasks/splunk_deploy_config_app - CHECK / CREATE file path for {{ deploy_config_app_name }}"
   file:
     path: "{{ deploy_config_app_destpath }}/{{ splunk_all_default_prefix }}-{{ deploy_config_app_name }}/{{ item }}"
     recurse: no
@@ -18,7 +20,7 @@
     - default
     - metadata
 
-- name: library_tasks - splunk_deploy_config_app - CHECK / DEPLOY default app.conf & default.meta file
+- name: "{{ task_bread_crumb }} - library/tasks/splunk_deploy_config_app - CHECK / DEPLOY default app.conf & default.meta file"
   copy:
     src: library/templates/common_files/{{ item.src }}
     dest: "{{ deploy_config_app_destpath }}/{{ splunk_all_default_prefix }}-{{ deploy_config_app_name }}/{{ item.dir }}/{{ item.src }}"
@@ -31,7 +33,7 @@
     - src: default.meta
       dir: metadata
 
-- name: library_tasks - splunk_deploy_config_app - CHECK / DEPLOY {{ deploy_config_app_name }} {{ deploy_config_app_filename }} template
+- name: "{{ task_bread_crumb }} - splunk_deploy_config_app - CHECK / DEPLOY {{ deploy_config_app_name }} {{ deploy_config_app_filename }} template"
   template:
     src: library/templates/{{ deploy_config_app_name }}/{{ deploy_config_app_filename }}
     dest: "{{ deploy_config_app_destpath }}/{{ splunk_all_default_prefix }}-{{ deploy_config_app_name }}/default/{{ deploy_config_app_filename }}"
