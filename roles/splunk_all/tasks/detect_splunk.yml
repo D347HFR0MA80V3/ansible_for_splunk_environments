@@ -4,6 +4,53 @@
 
 - name: detect_splunk - ID the Splunk user and register response
   command: id {{ splunk_all_splunk_user }}
-  ignore_errors: true
+  failed_when: false
+  changed_when: false
   register: detect_splunk_user
-  changed_when: detect_splunk_user.rc != 0
+
+- name: detect_splunk - assertion test of splunk user
+  assert:
+    that: detect_splunk_user.rc == 0
+    success_msg: "Configured Splunk user exits"
+    fail_msg: "Configured Splunk user not found, revisit host setup"
+
+- name: detect_splunk - STAT check splunk home directory
+  stat:
+    path: "{{ splunk_all_splunk_home }}"
+  changed_when: false
+  failed_when: false
+  register: detect_splunk_home
+
+- name: detect_splunk - assertion test of splunk home
+  assert:
+    that: detect_splunk_home.stat.exists | bool
+    success_msg: "Splunk home path is configured"
+    fail_msg: "Splunk home path is not configured, revisit host setup"
+
+- name: detect_splunk - FIND installed splunk manifest
+  find:
+    paths: "{{ splunk_all_splunk_home }}"
+    file_type: file
+    use_regex: yes
+    patterns: ['.*-manifest$']
+  changed_when: false
+  failed_when: false
+  register: detect_splunk_install
+
+- name: detect_splunk - assertion test of splunk install
+  assert:
+    that: not detect_splunk_install.failed | bool
+    success_msg: "Manifest found, Splunk is installed"
+    fail_msg: "Manifest not foud, Splunk is not installed"
+
+- name: detect_splunk - COMMAND check splunk status
+  command: "{{ splunk_all_cli_command }} status"
+  register: detect_splunk_status
+  changed_when: false
+  failed_when: false
+
+- name: detect_splunk - assertion test that splunkd is running
+  assert:
+    that: detect_splunk_status.rc == 0
+    success_msg: "Splunk is running"
+    fail_msg: "Splunk is not running"

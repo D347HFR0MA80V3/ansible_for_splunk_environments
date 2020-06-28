@@ -2,8 +2,76 @@
 - name: Prepare
   hosts: all
   tasks:
-    - name: prepare - USER check or create the splunk user
+    - name: prepare - USER check / create the splunk user
       user:
         name: splunk
         system: true
         state: present
+      changed_when: false
+    
+    - name: prepare - FILE check / create the home directory
+      file:
+        path: /opt/splunk
+        state: directory
+        owner: splunk
+        group: splunk
+        mode: '0755'
+      changed_when: false
+
+    - name: prepare - STAT check for presence of splunk install package
+      stat:
+        path: /opt/splunk_install.tgz
+      register: splunk_install
+
+    - name: prepare - GET_URL download the splunk bits if needed
+      get_url:
+        dest: /opt/splunk_install.tgz
+        url: https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=8.0.4.1&product=splunk&filename=splunk-8.0.4.1-ab7a85abaa98-Linux-x86_64.tgz&wget=true
+        mode: '0666'
+        timeout: 600
+      when: not splunk_install.stat.exists
+
+    - name: prepare - COMMAND check for completed splunk install
+      stat:
+        path: /opt/splunk/bin/splunk
+      register: splunk_status
+
+    - name: prepare - UNARCHIVE splunk install
+      unarchive:
+        src: /opt/splunk_install.tgz
+        dest: /opt
+        remote_src: true
+        group: splunk
+        owner: splunk
+      when: not splunk_status.stat.exists
+
+    - name: prepare - INI_FILE set user-seed.conf username
+      ini_file:
+        path: /opt/splunk/etc/system/local/user-seed.conf
+        section: user_info
+        option: USERNAME
+        value: admin
+        mode: 644
+        create: true
+        owner: splunk
+        group: splunk
+      when: not splunk_status.stat.exists
+
+    - name: prepare - INI_FILE set user-seed.conf password
+      ini_file:
+        path: /opt/splunk/etc/system/local/user-seed.conf
+        section: user_info
+        option: PASSWORD
+        value: $up3r$plunk3r
+        mode: 644
+        create: true
+        owner: splunk
+        group: splunk
+      when: not splunk_status.stat.exists
+
+    - name: prepare - COMMAND start splunk
+      command: /opt/splunk/bin/splunk start --accept-license --answer-yes --no-prompt
+      become: true
+      become_method: sudo
+      become_user: splunk
+      when: not splunk_status.stat.exists
