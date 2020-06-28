@@ -1,11 +1,14 @@
 ---
 # Library Task... Include this to get the decrypted value for a captured secret.
+
 # Registers the cli_decrypted_value variable. cli_decrypt_value.stdout contains the desired result.
+
 # How to use:
 # - include: library/splunk_cli_decrypt_value.yml
+#     task_bread_crumb=<name of the task that called this one eg: detect_splunk>
 #     cli_decrypt_secret=<encrypted value eg: pass4SymmKey, sslPassword>
 
-- name: library_tasks - splunk_cli_decrypt_value - SPLUNK CLI command to decrypt a splunk secret value
+- name: "{{ task_bread_crumb }} - library/tasks/splunk_cli_decrypt_value - SPLUNK CLI command to decrypt a splunk secret value"
   command: "{{ splunk_all_cli_command }} show-decrypted --value '{{ cli_decrypt_secret }}'"
   register: cli_decrypted_value
   failed_when: cli_decrypted_value.rc != 0
