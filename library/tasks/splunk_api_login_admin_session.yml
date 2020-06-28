@@ -21,9 +21,9 @@
     return_content: yes
   no_log: yes
   register: splunk_session
-  when: detected_status == 0
+  when: splunk_running
 
 - name: library_tasks - splunk_api_login_admin_session - SET fact with the returned session cookie
   set_fact:
     splunk_cookie: "{{ splunk_session.cookies_string | regex_replace ('splunkd_\\d+\\=(\\w+)', '\\1') }}"
-  when: detected_status == 0
+  when: splunk_running

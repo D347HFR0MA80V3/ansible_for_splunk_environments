@@ -27,4 +27,4 @@
     - get_property_value.status > 200
     - get_property_value.status < 404
     - get_property_value.status > 404
-  when: detected_status == 0
+  when: splunk_running
