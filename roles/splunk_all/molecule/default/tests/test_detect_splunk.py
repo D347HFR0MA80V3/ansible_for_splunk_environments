@@ -1,6 +1,5 @@
 import glob
 import takeltest
-import testinfra.utils.ansible_runner
 
 
 testinfra_hosts = takeltest.hosts()
