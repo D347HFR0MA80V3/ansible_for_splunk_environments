@@ -8,7 +8,7 @@
         system: true
         state: present
       changed_when: false
-    
+
     - name: prepare - FILE check / create the home directory
       file:
         path: /opt/splunk
