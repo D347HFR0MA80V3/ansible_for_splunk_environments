@@ -13,6 +13,7 @@
     that: detect_splunk_user.rc == 0
     success_msg: "Configured Splunk user exits"
     fail_msg: "Configured Splunk user not found, revisit host setup"
+  register: test_one
 
 - name: detect_splunk - STAT check splunk home directory
   stat:
@@ -26,6 +27,7 @@
     that: detect_splunk_home.stat.exists | bool
     success_msg: "Splunk home path is configured"
     fail_msg: "Splunk home path is not configured, revisit host setup"
+  register: test_two
 
 - name: detect_splunk - FIND installed splunk manifest
   find:
@@ -42,6 +44,7 @@
     that: not detect_splunk_install.failed | bool
     success_msg: "Manifest found, Splunk is installed"
     fail_msg: "Manifest not foud, Splunk is not installed"
+  register: test_three
 
 - name: detect_splunk - COMMAND check splunk status
   command: "{{ splunk_all_cli_command }} status"
@@ -54,3 +57,4 @@
     that: detect_splunk_status.rc == 0
     success_msg: "Splunk is running"
     fail_msg: "Splunk is not running"
+  register: test_four
