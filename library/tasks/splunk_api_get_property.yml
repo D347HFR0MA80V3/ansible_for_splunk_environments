@@ -1,15 +1,18 @@
 ---
 # Library Task... Include this to get the current winning value of a Splunk parameter.
+
 # Registers the get_property_value variable and get_property_value.content will contain the desired value.
+
 # How to use:
 # - include: library/tasks/splunk_api_get_property.yml
+#     task_bread_crumb=<name of the task that called this one eg: detect_splunk>
 #     get_property_filename=<name of file eg: indexes,server,web etc...>
 #     get_property_stanza=<name of staza eg: default,tcpout,sslConfig etc...>
 #     get_property_key=<name of key eg: pass4SymmKey,caCertPath,serverName etc...>
 #     get_property_no_log=<set no log eg: (yes|no)>
 #     get_property_validate_certs=<set certificate validation for api call eg: (yes|no)>
 
-- name: library_tasks - splunk_api_get_property - URI GET a splunk property setting -> {{ get_property_filename }}.conf -> [{{ get_property_stanza }}] -> {{ get_property_key }} = ?
+- name: "{{ task_bread_crumb }} - library/tasks/splunk_api_get_property - URI GET a splunk property setting -> {{ get_property_filename }}.conf -> [{{ get_property_stanza }}] -> {{ get_property_key }} = ?"
   uri:
     method: GET
     url: https://localhost:{{ splunk_all_mgmt_port }}/services/properties/{{ get_property_filename }}/{{ get_property_stanza }}/{{ get_property_key }}
