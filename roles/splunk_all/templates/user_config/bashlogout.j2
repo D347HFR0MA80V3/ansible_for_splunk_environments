@@ -1,0 +1,4 @@
+# ~/.bash_logout
+
+# Clear Splunk user session on logouts
+{{ splunk_all_cli_command }} logout 1>/dev/null 2>&1

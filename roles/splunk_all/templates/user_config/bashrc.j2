@@ -1,0 +1,23 @@
+## Source any global definitions
+
+if [ -f /etc/basrc ]; then
+        . /etc/bashrc
+fi
+
+
+## Splunk user settings
+
+export SPLUNK_HOME={{ splunk_all_splunk_home }}
+export PATH=$PATH:{{ splunk_all_splunk_home }}/bin
+spec() {
+  less {{ splunk_all_splunk_home }}/etc/system/README/${1}.conf.spec
+}
+source {{ splunk_all_splunk_home }}/bin/setSplunkEnv
+alias spec=spec
+alias logs="cd $SPLUNK_HOME/var/log/splunk"
+alias esl="cd $SPLUNK_HOME/etc/system/local"
+alias apps="cd {{ splunk_all_splunk_appspath }}"
+alias dapps="cd {{ splunk_all_splunk_dappspath }}"
+alias mapps="cd {{ splunk_all_splunk_mappspath }}"
+alias shapps="cd {{ splunk_all_splunk_shappspath }}"
+alias slapps="cd {{ splunk_all_splunk_slappspath }}"
