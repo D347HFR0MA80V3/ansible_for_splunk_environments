@@ -1,15 +1,18 @@
 ---
 # Library task... this can be included in a regular task to set an etc/system/local .conf file value in a specific stanza.
+
 # Registers esl_set_property_response. esl_set_property_response.content contains the response message.
+
 # How to use:
 # - include: library/splunk_ini_esl_set_property.yml
+#     task_bread_crumb=<name of the task that called this one eg: detect_splunk>
 #     esl_set_property_filename=<name of file eg: indexes,server,web etc...>
 #     esl_set_property_stanza=<name of staza eg: default,tcpout,sslConfig etc...>
 #     esl_set_property_key=<name of key eg: pass4SymmKey,caCertPath,serverName etc...>
 #     esl_set_property_value=<value to be set>
 #     esl_set_property_no_log=<set no log eg: (yes|no)>
 
-- name: library - splunk_set_esl_set_property - INI_FILE check/update {{ splunk_all_splunk_home }}/etc/system/local/{{ esl_set_property_filename }}.conf -> [{{ esl_set_property_stanza }}] -> {{ esl_set_property_key }} = ?
+- name: "{{ task_bread_crumb }} - library/tasks/splunk_set_esl_set_property - INI_FILE check/update {{ splunk_all_splunk_home }}/etc/system/local/{{ esl_set_property_filename }}.conf -> [{{ esl_set_property_stanza }}] -> {{ esl_set_property_key }} = ?"
   ini_file:
     path: "{{ splunk_all_splunk_home }}/etc/system/local/{{ esl_set_property_filename }}.conf"
     section: "{{ esl_set_property_stanza }}"
