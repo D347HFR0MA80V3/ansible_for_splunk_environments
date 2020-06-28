@@ -1,8 +1,8 @@
 ---
 # defaults file for splunk_all
 
-splunk_all_default_prefix: 'z_shark_defaults'
 splunk_all_cli_command: '/opt/splunk/bin/splunk'
+splunk_all_default_prefix: 'z_defaults'
 splunk_all_dir_mode: '0755'
 splunk_all_file_mode: '0644'
 splunk_all_mgmt_port: '8089'
@@ -14,3 +14,6 @@ splunk_all_splunk_appspath: '/opt/splunk/etc/apps'
 splunk_all_splunk_dappspath: '/opt/splunk/etc/deployment-apps'
 splunk_all_splunk_mappspath: '/opt/splunk/etc/master-apps'
 splunk_all_splunk_shappspath: '/opt/splunk/etc/shcluster/apps'
+splunk_all_splunk_slappspath: '/opt/splunk/etc/slave-apps'
+splunk_all_user_home: '/home/splunk'
+splunk_all_user_shell: '/bin/bash'
