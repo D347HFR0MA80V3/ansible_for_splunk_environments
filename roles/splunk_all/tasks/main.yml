@@ -5,3 +5,7 @@
   tags:
     - always
     - detect_splunk
+
+- include: user_config.yml
+  tags:
+    - user_config
