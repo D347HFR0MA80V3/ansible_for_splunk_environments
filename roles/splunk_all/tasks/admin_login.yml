@@ -1,0 +1,6 @@
+---
+# Login an admin user or service user to authenticate the session and capture the session cookie
+
+- include: library/tasks/splunk_api_login_admin_session.yml
+    task_bread_crumb=login_admin
+    login_admin_session_validate_certs=no
