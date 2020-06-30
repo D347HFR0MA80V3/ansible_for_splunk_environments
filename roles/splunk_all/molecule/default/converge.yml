@@ -1,5 +1,3 @@
 ---
 - name: Converge
-  hosts: all
-  roles:
-    - role: splunk_all
+  import_playbook: ../../../../launch_role-splunk_all.yml
