@@ -2,14 +2,14 @@
 - name: Prepare
   hosts: all
   tasks:
-    - name: prepare - USER check / create the splunk user
+    - name: prepare - USER create the splunk user
       user:
         name: splunk
         system: true
         state: present
       changed_when: false
 
-    - name: prepare - FILE check / create the home directory
+    - name: prepare - FILE create the home directory
       file:
         path: /opt/splunk
         state: directory
@@ -23,7 +23,7 @@
         path: /opt/splunk_install.tgz
       register: splunk_install
 
-    - name: prepare - GET_URL download the splunk bits if needed
+    - name: prepare - GET_URL download the splunk bits
       get_url:
         dest: /opt/splunk_install.tgz
         url: https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=8.0.4.1&product=splunk&filename=splunk-8.0.4.1-ab7a85abaa98-Linux-x86_64.tgz&wget=true
@@ -51,7 +51,7 @@
         section: user_info
         option: USERNAME
         value: admin
-        mode: 644
+        mode: 0644
         create: true
         owner: splunk
         group: splunk
@@ -62,8 +62,8 @@
         path: /opt/splunk/etc/system/local/user-seed.conf
         section: user_info
         option: PASSWORD
-        value: $up3r$plunk3r
-        mode: 644
+        value: supersplunker
+        mode: 0644
         create: true
         owner: splunk
         group: splunk
