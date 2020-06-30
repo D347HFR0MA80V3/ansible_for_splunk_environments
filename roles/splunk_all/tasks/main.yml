@@ -9,3 +9,8 @@
 - include: user_config.yml
   tags:
     - user_config
+
+- include: admin_login.yml
+  tags:
+    - always
+    - admin_login
