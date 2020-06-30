@@ -1,22 +1,26 @@
 ---
 # Check and/or configure customizations for splunk user settings
 
-- name: user_config - USER get / configure splunk user settings
-  user:
-    name: "{{ splunk_all_splunk_user }}"
-    home: "{{ splunk_all_user_home }}"
-    shell: "{{ splunk_all_user_shell }}"
-  register: user_config_settings
-
-- name: user_config - TEMPLATE check / deploy user_config templates
-  template:
-    src: templates/user_config/{{ item.src }}
-    dest: "{{ splunk_all_user_home }}/{{ item.dst }}"
-    owner: "{{ splunk_all_splunk_user }}"
-    group: "{{ splunk_all_splunk_group }}"
-    mode: "{{ splunk_all_file_mode }}"
-  loop:
-    - src: bashrc.j2
-      dst: .bashrc
-    - src: bashlogout.j2
-      dst: .bash_logout
+- name: block
+  block:
+    - name: user_config - USER get / configure splunk user settings
+      user:
+        name: "{{ splunk_all_splunk_user }}"
+        home: "{{ splunk_all_user_home }}"
+        shell: "{{ splunk_all_user_shell }}"
+      register: user_config_settings
+    - name: user_config - TEMPLATE check / deploy user_config templates
+      template:
+        src: templates/user_config/{{ item.src }}
+        dest: "{{ splunk_all_user_home }}/{{ item.dst }}"
+        owner: "{{ splunk_all_splunk_user }}"
+        group: "{{ splunk_all_splunk_group }}"
+        mode: "{{ splunk_all_file_mode }}"
+      loop:
+        - src: bashrc.j2
+          dst: .bashrc
+        - src: bashlogout.j2
+          dst: .bash_logout
+  become: yes
+  become_user: root
+  become_method: sudo
