@@ -1,8 +1,8 @@
 ---
 language: python
 os: osx
-python:
-  - "3.6"
+# python:
+#   - "3.6"
 services:
   - docker
 install:
