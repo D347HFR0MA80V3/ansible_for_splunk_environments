@@ -17,3 +17,5 @@ provisioner:
   name: ansible
 verifier:
   name: testinfra
+  env:
+    TESTVARS_EXTRA_VARS: ../../defaults/main.yml
