@@ -23,7 +23,7 @@
   register: splunk_session
   when: splunk_running
 
-- name: "{{ task_bread_crumb }} - library/tasks/splunk_api_login_admin_session - SET fact with the returned session cookie"
+- name: "{{ task_bread_crumb }} - library/tasks/splunk_api_login_admin_session - SET_FACT with the returned session cookie"
   set_fact:
     splunk_cookie: "{{ splunk_session.cookies_string | regex_replace ('splunkd_\\d+\\=(\\w+)', '\\1') }}"
   when: splunk_running
