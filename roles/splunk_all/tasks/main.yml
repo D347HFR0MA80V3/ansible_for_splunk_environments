@@ -11,6 +11,7 @@
     - user_config
 
 - include: fips_mode.yml
+  when: splunk_all_fips_mode | bool
   tags:
     - fips_mode
 
