@@ -1,6 +1,23 @@
 ---
 # Check the state of the general pass4SymmKey, write value when not in state
 
-- name: foo
-  debug:
-    msg: pass
+- include: library/tasks/splunk_api_get_property.yml
+    task_bread_crumb=general_p4sk
+    get_property_filename=server
+    get_property_stanza=general
+    get_property_key=pass4SymmKey
+    get_property_no_log=yes
+    get_property_validate_certs=no
+
+- include: library/tasks/splunk_cli_decrypt_value.yml
+    task_bread_crumb=general_p4sk
+    cli_decrypt_secret="{{ get_property_value.content }}"
+
+- include: library/tasks/splunk_ini_esl_set_property.yml
+    task_bread_crumb=general_p4sk
+    esl_set_property_filename=server
+    esl_set_property_stanza=general
+    esl_set_property_key=pass4SymmKey
+    esl_set_property_value="{{ splunk_all_general_p4sk }}"
+    esl_set_property_no_log=no
+  when: cli_decrypt_value.stdout != splunk_all_general_p4sk
