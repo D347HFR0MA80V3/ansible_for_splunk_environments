@@ -16,11 +16,11 @@
     - always
     - fips_mode
 
-- include: general_p4sk.yml
-  tags:
-    - general_p4sk
-
 - include: admin_login.yml
   tags:
     - always
     - admin_login
+
+- include: general_p4sk.yml
+  tags:
+    - general_p4sk
