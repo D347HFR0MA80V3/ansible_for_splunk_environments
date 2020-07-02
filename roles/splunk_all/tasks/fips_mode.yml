@@ -1,0 +1,14 @@
+---
+# Enforces Splunk FIPS mode enabled when the splunk_all_fips_mode is set to true
+
+- name: fips_mode - INI_FILE check / update {{ splunk_all_splunk_home }}/etc/splunk-launch.conf - SPLUNK_FIPS = {{ splunk_all_fips_mode }}
+  ini_file:
+    path: "{{ splunk_all_splunk_home }}/etc/splunk-launch.conf"
+    option: SPLUNK_FIPS
+    section: null
+    value: "{{ splunk_all_fips_mode }}"
+    state: present
+    create: yes
+    owner: "{{ splunk_all_splunk_user }}"
+    group: "{{ splunk_all_splunk_group }}"
+    mode: "{{ splunk_all_file_mode }}"
