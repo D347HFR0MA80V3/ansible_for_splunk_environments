@@ -1,0 +1,6 @@
+---
+# Check the state of the general pass4SymmKey, write value when not in state
+
+- name: foo
+  debug:
+    msg: pass

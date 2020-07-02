@@ -13,7 +13,12 @@
 - include: fips_mode.yml
   when: splunk_all_fips_mode | bool
   tags:
+    - always
     - fips_mode
+
+- include: general_p4sk.yml
+  tags:
+    - general_p4sk
 
 - include: admin_login.yml
   tags:
