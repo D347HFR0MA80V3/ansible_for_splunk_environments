@@ -4,7 +4,7 @@
 # Registers the cli_decrypted_value variable. cli_decrypt_value.stdout contains the desired result.
 
 # How to use:
-# - include: library/splunk_cli_decrypt_value.yml
+# - include: library/tasks/splunk_cli_decrypt_value.yml
 #     task_bread_crumb=<name of the task that called this one eg: detect_splunk>
 #     cli_decrypt_secret=<encrypted value eg: pass4SymmKey, sslPassword>
 
