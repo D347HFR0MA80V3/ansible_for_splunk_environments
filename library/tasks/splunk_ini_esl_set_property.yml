@@ -4,7 +4,7 @@
 # Registers esl_set_property_response. esl_set_property_response.content contains the response message.
 
 # How to use:
-# - include: library/splunk_ini_esl_set_property.yml
+# - include: library/tasks/splunk_ini_esl_set_property.yml
 #     task_bread_crumb=<name of the task that called this one eg: detect_splunk>
 #     esl_set_property_filename=<name of file eg: indexes,server,web etc...>
 #     esl_set_property_stanza=<name of staza eg: default,tcpout,sslConfig etc...>

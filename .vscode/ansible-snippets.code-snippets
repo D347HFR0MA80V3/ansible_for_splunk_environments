@@ -49,7 +49,7 @@
 		"scope": "yaml",
 		"prefix": "splunk_ini_esl_set_property",
 		"body": [
-			 "- include: library/splunk_ini_esl_set_property.yml",
+			 "- include: library/tasks/splunk_ini_esl_set_property.yml",
 			 "    task_bread_crumb=<string> # name of the task that called this one eg detect_splunk",
 			 "    esl_set_property_filename=<string> # name of file eg indexes,server,web etc...",
 			 "    esl_set_property_stanza=<string> # name of staza eg: default,tcpout,sslConfig etc...",
