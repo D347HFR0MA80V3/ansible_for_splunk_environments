@@ -1,0 +1,62 @@
+{
+	"Splunk API Get Property": {
+		"scope": "yaml",
+		"prefix": "splunk_api_get_property",
+		"body": [
+			 "- include: library/tasks/splunk_api_get_property.yml",
+			 "    task_bread_crumb=<string> # name of the task that called this one eg detect_splunk",
+			 "    get_property_filename=<string> # name of file eg indexes,server,web etc...",
+			 "    get_property_stanza=<string> # name of staza eg default,tcpout,sslConfig etc...",
+			 "    get_property_key=<string> # name of key eg pass4SymmKey,caCertPath,serverName etc...",
+			 "    get_property_no_log=<bool> # set no log eg yes or no",
+			 "    get_property_validate_certs=<bool> # set certificate validation for api call eg yes or no"
+		],
+		"description": "Paste in include statement for splunk_api_get_property"
+	},
+	"Splunk API Login Admin": {
+		"scope": "yaml",
+		"prefix": "splunk_api_login_admin",
+		"body": [
+			 "- include: library/tasks/splunk_api_login_admin_session.yml",
+			 "    task_bread_crumb=<string> # name of the task that called this one eg detect_splunk",
+			 "    login_admin_session_validate_certs=<bool> # set certificate validation for api call eg yes or no"
+		],
+		"description": "Paste in include statement for splunk_api_login_admin"
+	},
+	"Splunk CLI Decrypt Value": {
+		"scope": "yaml",
+		"prefix": "splunk_cli_decrypt_value",
+		"body": [
+			 "- include: library/tasks/splunk_cli_decrypt_value.yml",
+			 "    task_bread_crumb=<string> # name of the task that called this one eg detect_splunk",
+			 "    cli_decrypt_secret=<string> # encrypted value eg pass4SymmKey, sslPassword"
+		],
+		"description": "Paste in include statement for splunk_cli_decrypt_value"
+	},
+	"Splunk Deploy Config App": {
+		"scope": "yaml",
+		"prefix": "splunk_deploy_config_app",
+		"body": [
+			 "- include: library/tasks/splunk_deploy_config_app.yml",
+			 "    task_bread_crumb=<string> # name of the task that called this one eg detect_splunk",
+			 "    deploy_config_app_name=<string> # name of app eg default_ouputs,default_inputs etc...",
+			 "    deploy_config_app_destpath=<string> # likely a path variable eg {{ splunk_all_splunk_appspath }}",
+			 "    deploy_config_app_filename=<string> # name of the splunk conf file eg indexes,server etc..."
+		],
+		"description": "Paste in include statement for splunk_deploy_config_app"
+	},
+	"Splunk INI ESL Set Property": {
+		"scope": "yaml",
+		"prefix": "splunk_ini_esl_set_property",
+		"body": [
+			 "- include: library/splunk_ini_esl_set_property.yml",
+			 "    task_bread_crumb=<string> # name of the task that called this one eg detect_splunk",
+			 "    esl_set_property_filename=<string> # name of file eg indexes,server,web etc...",
+			 "    esl_set_property_stanza=<string> # name of staza eg: default,tcpout,sslConfig etc...",
+			 "    esl_set_property_key=<string> # name of key eg pass4SymmKey,caCertPath,serverName etc...",
+			 "    esl_set_property_value=<string> # value to be set, commonly a variable",
+			 "    esl_set_property_no_log=<bool> # set no log eg yes or no"
+		],
+		"description": "Paste in include statement for splunk_ini_esl_set_property"
+	}
+}
