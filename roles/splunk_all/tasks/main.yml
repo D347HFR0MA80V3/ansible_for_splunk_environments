@@ -10,6 +10,10 @@
   tags:
     - user_config
 
+- include: fips_mode.yml
+  tags:
+    - fips_mode
+
 - include: admin_login.yml
   tags:
     - always
