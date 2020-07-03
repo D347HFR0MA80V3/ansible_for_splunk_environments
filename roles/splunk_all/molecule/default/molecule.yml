@@ -11,8 +11,12 @@ lint: |
 platforms:
   - name: centos
     image: centos:7
+    security_options:
+      - seccomp=unconfined
   - name: ubuntu
     image: ubuntu:16.04
+    security_options:
+      - seccomp=unconfined
 provisioner:
   name: ansible
 verifier:
