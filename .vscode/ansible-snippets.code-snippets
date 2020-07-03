@@ -1,4 +1,14 @@
 {
+	"New Named Task": {
+		"scope": "yaml",
+		"prefix": "name",
+		"body": [
+			 "- name: ${TM_FILENAME/\\.yml//} - ",
+			 "  debug:",
+			 "    msg: 'New Task'"
+		],
+		"description": "Start a new task"
+	},
 	"Splunk API Get Property": {
 		"scope": "yaml",
 		"prefix": "splunk_api_get_property",
