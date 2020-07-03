@@ -1,5 +1,7 @@
 splunk_all
-=========
+==========
+
+[Home](../../docs/README.md)
 
 This role contains tasks that need to be performed on all Splunk Enterprise nodes within an environment. It is all the origin for all default variables that need to be available to other roles. All other roles will have a dependency on at least this role.
 
