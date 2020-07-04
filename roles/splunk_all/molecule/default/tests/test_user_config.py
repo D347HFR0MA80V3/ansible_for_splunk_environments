@@ -1,4 +1,3 @@
-import testinfra
 import takeltest
 
 
