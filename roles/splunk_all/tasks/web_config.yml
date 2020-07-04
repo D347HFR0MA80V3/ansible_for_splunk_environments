@@ -1,0 +1,8 @@
+---
+# Deploy a default app with a jinja templated web config file to all endpoints
+
+- include: library/tasks/splunk_deploy_config_app.yml
+    task_bread_crumb=web_config
+    deploy_config_app_name=web_config
+    deploy_config_app_destpath="{{ splunk_all_splunk_appspath }}"
+    deploy_config_app_filename=web.conf
