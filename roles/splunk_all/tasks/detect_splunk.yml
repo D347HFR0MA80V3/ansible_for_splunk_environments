@@ -1,5 +1,5 @@
 ---
-# Detect that a splunk user is present, the splunk home directory is configured, splunk is installed and manifest is present, and that splunk is running. Set the splunk_running fact to true or false based on detections and tests.
+# Detect that a splunk user is present, the splunk home directory is configured, splunk is installed and manifest is present, wheteher splunk is systemd or initd managed, and that splunk is running. Set the splunk_running fact to true or false based on detections and tests.
 
 - name: detect_splunk - ID the Splunk user and register response
   command: id {{ splunk_all_splunk_user }}
@@ -41,6 +41,46 @@
     that: not detect_splunk_install.failed | bool
     success_msg: "Manifest found, Splunk is installed"
     fail_msg: "Manifest not found, Splunk is not installed"
+
+- name: detect_splunk - FIND evidence of initd managed splunk
+  find:
+    paths: /etc/init.d
+    file_type: file
+    use_regex: no
+    patterns: 'splunk'
+  changed_when: false
+  failed_when: false
+  register: detect_splunk_initd
+
+- name: detect_splunk - FIND evidence of systemd managed splunk 
+  find:
+    paths: 
+      - /sys/fs/cgroup/cpu/system.slice
+      - /sys/fs/cgroup/memory/system.slice
+    file_type: file
+    use_regex: no
+    patterns: 'Splunkd.service'
+  changed_when: false
+  failed_when: false
+  register: detect_splunk_systemd
+
+- name: detect_splunk - assertion test that splunk is initd managed
+  assert:
+    that: 
+      - detect_splunk_initd.matched | bool
+      - not detect_splunk_systemd.matched | bool
+    success_msg: "Splunk initd script found, Splunk is initd managed"
+    fail_msg: "Splunk initd script not found, Splunk is either systemd managed or boot start has not been enabled"
+  when: not splunk_all_systemd_managed | bool
+
+- name: detect_splunk - assertion test that splunk is systemd managed
+  assert:
+    that:
+      - detect_splunk_systemd.matched | bool
+      - not detect_splunk_initd.matched | bool
+    success_msg: "Splunk systemd files found, Splunk is systemd managed"
+    fail_msg: "Splunk systemd files not found, Splunk is either initd managed or boot start has not been enabled"
+  when: splunk_all_systemd_managed | bool
 
 - name: detect_splunk - COMMAND check splunk status
   command: "{{ splunk_all_cli_command }} status"
