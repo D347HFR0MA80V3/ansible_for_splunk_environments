@@ -1,4 +1,4 @@
-# This content is delivered by Ansible.
+# This content is a static file delivered by Ansible. For changes either override this in local or see source code and submit a pull request.
 
 []
 access = read : [ * ], write : [ admin ]
