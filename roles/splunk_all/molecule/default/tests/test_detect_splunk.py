@@ -24,6 +24,12 @@ def test_detect_splunk_install(host, testvars):
     glob.glob('/opt/splunk/splunk-*-manifest')
 
 
+def test_detect_splunk_management(host, testvars):
+    v = testvars['splunk_all_systemd_managed']
+    assert v == '0'
+    assert host.file('/etc/init.d/splunk').exists
+
+
 def test_detect_splunk_status(host, testvars):
     v = testvars['splunk_all_cli_command']
     assert v == "/opt/splunk/bin/splunk"
