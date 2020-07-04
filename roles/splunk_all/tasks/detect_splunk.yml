@@ -52,9 +52,9 @@
   failed_when: false
   register: detect_splunk_initd
 
-- name: detect_splunk - FIND evidence of systemd managed splunk 
+- name: detect_splunk - FIND evidence of systemd managed splunk
   find:
-    paths: 
+    paths:
       - /sys/fs/cgroup/cpu/system.slice
       - /sys/fs/cgroup/memory/system.slice
     file_type: file
@@ -66,7 +66,7 @@
 
 - name: detect_splunk - assertion test that splunk is initd managed
   assert:
-    that: 
+    that:
       - detect_splunk_initd.matched | bool
       - not detect_splunk_systemd.matched | bool
     success_msg: "Splunk initd script found, Splunk is initd managed"
