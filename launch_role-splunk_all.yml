@@ -4,7 +4,7 @@
 - hosts: "{{ target }}"
   become: yes
   become_method: sudo
-  become_user: "{{ splunk_all_splunk_user }}"
+  become_user: root
   gather_facts: yes
   vars_prompt:
     - name: "target"
