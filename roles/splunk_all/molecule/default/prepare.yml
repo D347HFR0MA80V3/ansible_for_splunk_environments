@@ -75,3 +75,6 @@
       become_method: sudo
       become_user: splunk
       when: not splunk_status.stat.exists
+
+    - name: prepare - COMMAND enable initd boot start
+      command: /opt/splunk/bin/splunk enable boot-start -systemd-managed 0 -user splunk
