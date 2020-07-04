@@ -9,6 +9,18 @@
 		],
 		"description": "Start a new task"
 	},
+	"New Named Assertion": {
+		"scope": "yaml",
+		"prefix": "assert",
+		"body": [
+			 "- name: ${TM_FILENAME/\\.yml//} - ",
+			 "  assert:",
+			 "    that: 'New Task'",
+			 "    success_msg: 'Success'",
+			 "    fail_msg: 'Failed'"
+		],
+		"description": "Start a new task"
+	},
 	"Splunk API Get Property": {
 		"scope": "yaml",
 		"prefix": "splunk_api_get_property",
