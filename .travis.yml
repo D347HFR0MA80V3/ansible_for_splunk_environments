@@ -6,7 +6,7 @@ python:
 services:
   - docker
 install:
-  - pip3 install -U molecule docker yamllint ansible-lint flake8 pluggy testinfra pytest takeltest
+  - pip3 install -U molecule docker jinja2 yamllint ansible-lint flake8 pluggy testinfra pytest takeltest
 script:
   - molecule --version
   - ansible --version
