@@ -20,9 +20,18 @@ def test_web_config_variables(host, testvars):
 
 
 def test_web_config_results(host, testvars):
-    assert host.file("/opt/splunk/etc/apps/z_defaults-web_config").is_directory
-    assert host.file('/opt/splunk/etc/apps/z_defaults-web_config/default').is_directory
-    assert host.file('/opt/splunk/etc/apps/z_defaults-web_config/metadata').is_directory
-    assert host.file('/opt/splunk/etc/apps/z_defaults-web_config/default/app.conf').md5sum == 'd13267f5501fe375d7139d13d594c318'
-    assert host.file('/opt/splunk/etc/apps/z_defaults-web_config/default/web.conf').md5sum == '648e9a25f4e5f64e2e37e8c39336bd49'
-    assert host.file('/opt/splunk/etc/apps/z_defaults-web_config/metadata/default.meta').md5sum == '73a29e7af6c9973b2f8864fbc7b0161a'
+    assert host.file(
+        "/opt/splunk/etc/apps/z_defaults-web_config").is_directory
+    assert host.file(
+        '/opt/splunk/etc/apps/z_defaults-web_config/default').is_directory
+    assert host.file(
+        '/opt/splunk/etc/apps/z_defaults-web_config/metadata').is_directory
+    assert host.file(
+        '/opt/splunk/etc/apps/z_defaults-web_config/default/app.conf')\
+        .md5sum == 'd13267f5501fe375d7139d13d594c318'
+    assert host.file(
+        '/opt/splunk/etc/apps/z_defaults-web_config/default/web.conf')\
+        .md5sum == '648e9a25f4e5f64e2e37e8c39336bd49'
+    assert host.file(
+        '/opt/splunk/etc/apps/z_defaults-web_config/metadata/default.meta')\
+        .md5sum == '73a29e7af6c9973b2f8864fbc7b0161a'
