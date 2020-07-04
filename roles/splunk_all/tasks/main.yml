@@ -10,6 +10,10 @@
   tags:
     - user_config
 
+- include: web_config.yml
+  tags:
+    - web_config
+
 - include: fips_mode.yml
   when: splunk_all_fips_mode | bool
   tags:
