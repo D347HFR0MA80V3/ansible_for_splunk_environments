@@ -7,7 +7,7 @@
     set -e
     yamllint ../splunk_ds
     ansible-lint ../splunk_ds
-    flake8 ../splunk_ds --exit-zero
+    flake8 ../splunk_ds
   platforms:
     - name: centos
       image: centos:7

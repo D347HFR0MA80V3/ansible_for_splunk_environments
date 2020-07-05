@@ -7,7 +7,7 @@ lint: |
   set -e
   yamllint ../splunk_all
   ansible-lint ../splunk_all
-  flake8 ../splunk_all --exit-zero
+  flake8 ../splunk_all
 platforms:
   - name: centos
     image: centos:7
