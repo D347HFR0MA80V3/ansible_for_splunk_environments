@@ -21,6 +21,8 @@ platforms:
       - seccomp=unconfined
 provisioner:
   name: ansible
+  playbooks:
+    prepare: ../../../../molecule_shared/playbooks/prepare.yml
 verifier:
   name: testinfra
   env:
