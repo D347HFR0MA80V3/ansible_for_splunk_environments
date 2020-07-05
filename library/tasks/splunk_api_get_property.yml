@@ -12,7 +12,7 @@
 #     get_property_no_log=<set no log eg: (yes|no)>
 #     get_property_validate_certs=<set certificate validation for api call eg: (yes|no)>
 
-- name: "{{ task_bread_crumb }} - library/tasks/splunk_api_get_property - URI get a splunk property setting -> {{ get_property_filename }}.conf -> [{{ get_property_stanza }}] -> {{ get_property_key }} = ?"
+- name: "{{ task_bread_crumb }} - splunk_api_get_property - URI get a splunk property setting -> {{ get_property_filename }}.conf -> [{{ get_property_stanza }}] -> {{ get_property_key }} = ?"
   uri:
     method: GET
     url: https://localhost:{{ splunk_all_mgmt_port }}/services/properties/{{ get_property_filename }}/{{ get_property_stanza }}/{{ get_property_key }}
