@@ -1,5 +1,5 @@
-Role Name
-=========
+splunk_idx
+==========
 
 [Home](../../docs/README.md)
 
