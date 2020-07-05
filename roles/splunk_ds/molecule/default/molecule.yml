@@ -1,29 +1,29 @@
 ---
-  dependency:
-    name: galaxy
-  driver:
-    name: docker
-  lint: |
-    set -e
-    yamllint ../splunk_ds
-    ansible-lint ../splunk_ds
-    flake8 ../splunk_ds
-  platforms:
-    - name: centos
-      image: centos:7
-      privileged: true
-      security_options:
-        - seccomp=unconfined
-    - name: ubuntu
-      image: ubuntu:16.04
-      privileged: true
-      security_options:
-        - seccomp=unconfined
-  provisioner:
-    name: ansible
-    playbooks:
-      prepare: ../../../../molecule_shared/playbooks/prepare.yml
-  verifier:
-    name: testinfra
-    env:
-      TESTVARS_EXTRA_VARS: ../../defaults/main.yml
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint ../splunk_ds
+  ansible-lint ../splunk_ds
+  flake8 ../splunk_ds
+platforms:
+  - name: centos
+    image: centos:7
+    privileged: true
+    security_options:
+      - seccomp=unconfined
+  - name: ubuntu
+    image: ubuntu:16.04
+    privileged: true
+    security_options:
+      - seccomp=unconfined
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ../../../../molecule_shared/playbooks/prepare.yml
+verifier:
+  name: testinfra
+  env:
+    TESTVARS_EXTRA_VARS: ../../defaults/main.yml
