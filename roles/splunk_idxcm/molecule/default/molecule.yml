@@ -5,9 +5,9 @@ driver:
   name: docker
 lint: |
   set -e
-  yamllint ../splunk_sh
-  ansible-lint ../splunk_sh
-  flake8 ../splunk_sh
+  yamllint ../splunk_idxcm
+  ansible-lint ../splunk_idxcm
+  flake8 ../splunk_idxcm
 platforms:
   - name: centos
     image: centos:7
@@ -24,7 +24,7 @@ platforms:
 provisioner:
   name: ansible
   ansible_args:
-    - --extra-vars=role_name=splunk_sh
+    - --extra-vars=role_name=splunk_idxcm
   playbooks:
     prepare: ../../../../molecule_shared/playbooks/prepare.yml
     converge: ../../../../molecule_shared/playbooks/converge.yml
