@@ -1,3 +1,0 @@
----
-- name: Converge
-  import_playbook: ../../../../launch_role-splunk_all.yml
