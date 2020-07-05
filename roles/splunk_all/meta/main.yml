@@ -12,5 +12,8 @@ galaxy_info:
     - name: CentOS
       versions:
         - 7.x
+    - name: Ubuntu
+      versions:
+        - 16.04
   galaxy_tags:
     - splunk
