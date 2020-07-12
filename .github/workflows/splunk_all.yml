@@ -41,7 +41,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt install docker
-          pip3 install --upgrade molecule jinja2 yamllint ansible-lint flake8 pluggy testinfra takeltest
+          pip3 install --upgrade molecule[docker] jinja2 yamllint ansible-lint flake8 pluggy testinfra takeltest
 
       # - name: Build the collection
       #   run: |
