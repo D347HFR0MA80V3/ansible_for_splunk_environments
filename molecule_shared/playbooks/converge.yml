@@ -1,3 +1,0 @@
----
-- name: Converge
-  import_playbook: ../../launch_role-single_role.yml
