@@ -1,0 +1,38 @@
+---
+name: "deathfromabove.ansible_for_splunk_enviroments.splunk_shc"
+on:
+  pull_request:
+    paths:
+      - 'roles/splunk_shc/**'
+      - 'molecule/splunk_shc/**'
+      - '.github/workflows/splunk_shc.yml'
+      - 'library/**'
+jobs:
+  molecule:
+    runs-on: ubuntu-18.04
+    env:
+      PY_COLORS: 1
+      ANSIBLE_FORCE_COLOR: 1
+    strategy:
+      fail-fast: true
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          sudo apt install docker
+          pip3 install --upgrade molecule[docker] jinja2 yamllint ansible-lint flake8 pluggy testinfra takeltest
+
+      - name: Run role tests
+        run: >-
+          ansible-lint ./
+          yamllint ./
+          molecule --version &&
+          ansible --version &&
+          molecule test -s splunk_shc
