@@ -1,0 +1,41 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  set -e
+  yamllint ./roles/splunk_idxcm
+  ansible-lint ./roles/splunk_idxcm
+  flake8 ./roles/splunk_idxcm
+platforms:
+  - name: centos
+    image: centos:7
+    dockerfile: ../../library/molecule_shared/Dockerfile.j2
+    privileged: true
+    security_options:
+      - seccomp=unconfined
+    volumes:
+      - /opt/splunk
+  - name: ubuntu
+    image: ubuntu:16.04
+    privileged: true
+    security_options:
+      - seccomp=unconfined
+    volumes:
+      - /opt/splunk
+provisioner:
+  name: ansible
+  ansible_args:
+    - --extra-vars=role_name=splunk_idxcm
+  config_options:
+    default:
+      strategy: mitogen_linear
+      strategy_plugins: ../../plugins/mitogen-0.2.9/ansible_mitogen/plugins/strategy
+  playbooks:
+    prepare: ../../library/molecule_shared/prepare.yml
+    converge: ../../library/molecule_shared/converge.yml
+verifier:
+  name: testinfra
+  env:
+    TESTVARS_EXTRA_VARS: ../../roles/splunk_idxcm/defaults/main.yml
